@@ -1,36 +1,46 @@
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Descarga implements Runnable{
 
-    private String nombre;
-    private int tiempoRandom;
+public class Descarga implements Runnable {
+
+
+    private static final int AJUSTE_BLOQUE = 1;
+    private final String nombre;
+    private final int tiempoBloque;
+    private int tiempoTotal;
+
 
     public Descarga(String nombre) {
         this.nombre = nombre;
+        // Elección aleatoria entre 100 y 500 ms por cada bloque
+        this.tiempoBloque = ThreadLocalRandom.current().nextInt(100, 501);
     }
 
-    public int getTiempoRandom() {
-        return tiempoRandom;
+    public int getTiempoTotal() {
+        return tiempoTotal;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
     @Override
     public void run() {
+        int tiempoEfectivoBloque = this.tiempoBloque * AJUSTE_BLOQUE;
+        this.tiempoTotal = tiempoEfectivoBloque * 10;
 
-        this.tiempoRandom = ThreadLocalRandom.current().nextInt(1000, 5001);
-        for (int i = 0; i < 11; i++) {
-            if (i!=10) {
-                System.out.println("[" + this.nombre + "] " + i + "0%");
-                try {
-                    Thread.sleep(300);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+        for (int i = 1; i <= 10; i++) {
+            try {
+                Thread.sleep(tiempoEfectivoBloque);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                throw new RuntimeException("Descarga interrumpida: " + nombre, e);
             }
-            else{
-                System.out.println("[" + this.nombre + "] completada en: " + tiempoRandom+" ms");
+
+            if (i < 10) {
+                System.out.println("[" + this.nombre + "] " + (i * 10) + "%");
+            } else {
+                System.out.println("[" + this.nombre + "] completada en " + this.tiempoTotal + " ms");
             }
         }
-
     }
 }
-

@@ -1,35 +1,51 @@
+import java.util.Arrays;
 
 
+public class GestorDescargas {
 
-void main(String[] args) {
+    public static void main(String[] args) {
+        String[] nombres = (args != null && args.length > 0)
+                ? args
+                : new String[]{"cuarzos.png", "meditacion.mp4", "mantras.mp3", "horoscopo.pdf"};
 
-    Descarga d1 = new Descarga("cuarzos.png");
-    Descarga d2 = new Descarga("meditacion.mp4");
-    Descarga d3 = new Descarga("mantras.mp3");
-    Descarga d4 = new Descarga("horscopo.pdf");
+        Descarga[] descargas = new Descarga[nombres.length];
+        Thread[] hilos = new Thread[nombres.length];
 
-    Thread t1 = new Thread(d1);
-    Thread t2 = new Thread(d2);
-    Thread t3 = new Thread(d3);
-    Thread t4 = new Thread(d4);
+        for (int i = 0; i < nombres.length; i++) {
+            descargas[i] = new Descarga(nombres[i]);
+            hilos[i] = new Thread(descargas[i], "Descarga-" + nombres[i]);
+        }
 
-    t1.start();
-    t2.start();
-    t3.start();
-    t4.start();
+        Monitor monitor = new Monitor(hilos);
 
-    try {
-        t1.join();
-        t2.join();
-        t3.join();
-        t4.join();
+        long tiempoInicio = System.currentTimeMillis();
 
-    } catch (InterruptedException e) {
-        throw new RuntimeException(e);
+        // Arrancar hilos de descarga y monitor
+        for (Thread t : hilos) {
+            t.start();
+        }
+        monitor.start();
+
+        // Esperar a que todos los hilos completen su trabajo
+        try {
+            for (Thread t : hilos) {
+                t.join();
+            }
+            monitor.join();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException("Error en la sincronización de hilos", e);
+        }
+
+        long tiempoFin = System.currentTimeMillis();
+        long tiempoReal = tiempoFin - tiempoInicio;
+
+        int acumuladoSerie = Arrays.stream(descargas)
+                .mapToInt(Descarga::getTiempoTotal)
+                .sum();
+
+        System.out.println("Todas las descargas han terminado.");
+        System.out.println("Tiempo real: " + tiempoReal + " ms");
+        System.out.println("Si se hubieran descargado una detrás de otra: " + acumuladoSerie + " ms");
     }
-    Descarga masLenta = Stream.of(d1, d2, d3, d4).max(Comparator.comparingDouble(Descarga::getTiempoRandom)).orElse(d1);
-    int suma = ThreadLocalRandom.current().nextInt(5, 15);
-    System.out.println("Tiempo real: "+ (masLenta.getTiempoRandom()+suma) + " ms");
-
 }
-
