@@ -22,6 +22,14 @@ public class Descarga implements Runnable {
     public String getNombre() {
         return nombre;
     }
+
+
+
+    /**
+     * Metodo en el cual se hace la descarga, primero se calcula con timepoEfectivoBloque cuanto va a
+     * tardar la descarga despues cada x tiempo se imprime como va la descraga y al final sale el tiempo de la descarga".
+     * * @author Sergio
+     */
     @Override
     public void run() {
         int tiempoEfectivoBloque = this.tiempoBloque;
