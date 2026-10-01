@@ -12,7 +12,7 @@ public class Monitor extends Thread {
     }
 
     /**
-     * Metodo en el cual se comprueban si los hilos estan funcionando o no, mediante un bucle mira cada hilo y con
+     * Método en el cúal se comprueban si los hilos estan funcionando o no, mediante un bucle mira cada hilo y con
      * .isAlive() comprueba si ya acabo la descarga o no.
      * * @author Sergio
      */
@@ -28,7 +28,7 @@ public class Monitor extends Thread {
 
 
     /**
-     * Metodo en el cual se comprueban cuantos hilos estan siendo descargados en ese momento, el programa accede
+     * Método en el cúal se comprueban cuantos hilos estan siendo descargados en ese momento, el programa accede
      * a los hilos comprueba que siguen siendo descargados y pone el mensaje, esta acción se repite cada poco tiempo
      * como comprobante de como van las descargas.
      * * @author Sergio

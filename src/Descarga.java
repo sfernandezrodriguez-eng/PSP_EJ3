@@ -1,8 +1,8 @@
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Clase que ejecuta la descarga de los elementos y cada x tiempo avisa el porcentaje de la decraga,
- * a parte de esto al final pone tiempo final.
+ * Clase que ejecuta la descarga de los elementos y cada x tiempo avisa el porcentaje de la decarga,
+ * aparte de esto al final pone tiempo final.
  * @author Sergio
  */
 public class Descarga implements Runnable {
@@ -26,8 +26,8 @@ public class Descarga implements Runnable {
     }
 
     /**
-     * Metodo en el cual se hace la descarga, primero se calcula con timepoEfectivoBloque cuanto va a
-     * tardar la descarga despues cada x tiempo se imprime como va la descraga y al final sale el tiempo de la descarga".
+     * Método en el cual se hace la descarga, primero se calcula con timepoEfectivoBloque cuanto va a
+     * tardar la descarga después cada x tiempo se imprime como va la descarga y al final sale el tiempo de la descarga".
      * * @author Sergio
      */
     @Override
