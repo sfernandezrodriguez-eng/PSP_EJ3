@@ -4,7 +4,6 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Descarga implements Runnable {
 
 
-    private static final int AJUSTE_BLOQUE = 1;
     private final String nombre;
     private final int tiempoBloque;
     private int tiempoTotal;
@@ -25,7 +24,7 @@ public class Descarga implements Runnable {
     }
     @Override
     public void run() {
-        int tiempoEfectivoBloque = this.tiempoBloque * AJUSTE_BLOQUE;
+        int tiempoEfectivoBloque = this.tiempoBloque;
         this.tiempoTotal = tiempoEfectivoBloque * 10;
 
         for (int i = 1; i <= 10; i++) {
