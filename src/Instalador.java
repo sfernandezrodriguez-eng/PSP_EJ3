@@ -1,8 +1,12 @@
+/**
+ * Clase que comprueba la descarga de mantra y meditacion, una vez ambas ya han sido descargadas
+ * aparecera un mensaje de instalación.
+ * @author Sergio
+ */
 public class Instalador extends Thread{
 
     private final Thread hiloMeditacion;
     private final Thread hiloMantras;
-
 
     public Instalador(Thread hiloMeditacion, Thread hiloMantras) {
         this.hiloMeditacion = hiloMeditacion;

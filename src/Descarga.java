@@ -1,13 +1,15 @@
 import java.util.concurrent.ThreadLocalRandom;
 
-
+/**
+ * Clase que ejecuta la descarga de los elementos y cada x tiempo avisa el porcentaje de la decraga,
+ * a parte de esto al final pone tiempo final.
+ * @author Sergio
+ */
 public class Descarga implements Runnable {
-
 
     private final String nombre;
     private final int tiempoBloque;
     private int tiempoTotal;
-
 
     public Descarga(String nombre) {
         this.nombre = nombre;
@@ -22,8 +24,6 @@ public class Descarga implements Runnable {
     public String getNombre() {
         return nombre;
     }
-
-
 
     /**
      * Metodo en el cual se hace la descarga, primero se calcula con timepoEfectivoBloque cuanto va a

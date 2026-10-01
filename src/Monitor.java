@@ -1,4 +1,7 @@
-
+/**
+ * Clase que comprueba el estado de las descargas, avisando al usuario cuantas quedan por acabar.
+ * @author Sergio
+ */
 public class Monitor extends Thread {
 
     private final Thread[] hilos;
@@ -7,7 +10,6 @@ public class Monitor extends Thread {
     public Monitor(Thread[] hilos) {
         this.hilos = hilos;
     }
-
 
     /**
      * Metodo en el cual se comprueban si los hilos estan funcionando o no, mediante un bucle mira cada hilo y con
@@ -45,7 +47,6 @@ public class Monitor extends Thread {
             }
             vivos = contarHilosVivos();
         }
-
         System.out.println("[Monitor] No queda ninguna descarga en curso");
     }
 }

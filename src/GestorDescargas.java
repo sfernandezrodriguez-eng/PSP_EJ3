@@ -1,8 +1,7 @@
-import java.util.Arrays;
-
 /**
- * Clase principal que gestiona la ejecución concurrente de las descargas,
+ * Clase principal que gestiona la ejecución de las descargas,
  * el monitor de estado y el instalador.
+ * @author Sergio
  */
 public class GestorDescargas {
 
